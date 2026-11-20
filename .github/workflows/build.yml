@@ -29,5 +29,5 @@ jobs:
           tags: digits-api:latest
           no-cache: true
           secrets: |
-            "mlflow_username=${{ secrets.DAGSHUB_USERNAME }}"
-            "mlflow_token=${{ secrets.DAGSHUB_TOKEN }}"
+            "dagshub_username=${{ secrets.DAGSHUB_USERNAME }}"
+            "dagshub_token=${{ secrets.DAGSHUB_TOKEN }}"
