@@ -1,0 +1,33 @@
+name: Build FastAPI Docker image
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: ./dockerfile
+          push: false
+          load: true
+          tags: digits-api:latest
+          no-cache: true
+          secrets: |
+            "mlflow_username=${{ secrets.DAGSHUB_USERNAME }}"
+            "mlflow_token=${{ secrets.DAGSHUB_TOKEN }}"
